@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "productivity Tab",
+    "author": "Hu Chen",
+    "version": "1.0.1",
+    "description": "awesome twitchTv emotes.",
+    "permissions": [ "storage" , "activeTab" ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'" ,
+    "browser_action": {
+     "default_popup": "index.html"
+    } ,
+    "content_scripts": [
+          {
+            "matches": ["https://*.twitch.tv/*"],
+            "js": ["script.js"]
+          }
+        ]
+}
