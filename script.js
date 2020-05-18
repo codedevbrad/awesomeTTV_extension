@@ -2,14 +2,18 @@
 var chatContainer = document.querySelector('.chat-scrollable-area__message-container');
 
 var matched__emotes = [
-  [ '%potato_curl' , 'img_1' ] , ['%potato_happy' , 'img_2' ] , [ '%potato_bleh' , 'img_3' ]
+  [ 'AWESOME_HA'  , 'https://res.cloudinary.com/dezoqwmss/image/upload/v1589817115/project_emotes/emote_3_shikj7.gif' ] ,
+  [ 'AWESOME_SI'  , 'https://res.cloudinary.com/dezoqwmss/image/upload/v1589817114/project_emotes/emote_2_bghcil.jpg' ] ,
+  [ 'AWESOME_SC'  , 'https://res.cloudinary.com/dezoqwmss/image/upload/v1589817114/project_emotes/emote_1_o8nz3p.jpg' ]
 ]
 
 const mutateString = ( words , string ) => {
+    var newString = string;
+
     words.forEach( ( each_word ) => {
-        string = new__string.replace( each_word[0] , each_word[1] );
+        newString = newString.replace( each_word[0] , `<img src=${ each_word[1] } width="32" height="32" />` );
     });
-    return string;
+    return newString;
 }
 
 var x = new MutationObserver( ( e ) => {
@@ -27,3 +31,19 @@ var x = new MutationObserver( ( e ) => {
 });
 
 x.observe( chatContainer , { childList: true });
+
+// build out emote chooser
+
+// let chat__textbox = false;
+// let chat__emoteContainer = false;
+//
+// const chat__build = ( ) => {
+//     let chat__newElement = document.createElement('div');
+//         chat__newElement.id = 'chatbox_awesomeGIF';
+//
+//     matched__emotes.forEach( ( each_emote ) => {
+//
+//     });
+// }
+
+// <img src=${ each_word[1] } width="32" height="32" />
