@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "productivity Tab",
-    "author": "Hu Chen",
-    "version": "1.0.1",
+    "name": "chatbot_awesome_TTV",
+    "author": "Bradley Lumber",
+    "version": "1.0.0",
     "description": "awesome twitchTv emotes.",
     "permissions": [ "storage" , "activeTab" ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'" ,
@@ -12,7 +12,8 @@
     "content_scripts": [
           {
             "matches": ["https://*.twitch.tv/*"],
-            "js": ["script.js"]
+            "css": ["/dist/css/extension_style.css"] ,
+            "js":  ["/dist/js/extension_js.js"]
           }
-        ]
+    ]
 }
