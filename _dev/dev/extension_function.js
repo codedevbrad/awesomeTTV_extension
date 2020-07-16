@@ -1,35 +1,35 @@
 //
 import { emotes_list as matched__emotes , emotes_html as emotes } from './_chatbox/_chatbox_emotes.js';
 import { template } from './_chatbox/_chatbox_template.js';
-
 import './extension_styles.scss';
 
-var chatContainer = document.querySelector('.chat-scrollable-area__message-container');
+let twitch_chat = 'chat-input.tw-block' ,
+          isDev = true ,
+           env = isDev ? '#app' : twitch_chat;
 
-const mutateString = ( words , string ) => {
-    var newString = string;
+// var chatContainer = document.querySelector('.chat-scrollable-area__message-container');
+// const mutateString = ( words , string ) => {
+//     var newString = string;
+//     words.forEach( ( each_word ) => {
+//         newString = newString.replace( each_word[0] , `<img src=${ each_word[1] } width="32" height="32" />` );
+//     });
+//     return newString;
+// }
 
-    words.forEach( ( each_word ) => {
-        newString = newString.replace( each_word[0] , `<img src=${ each_word[1] } width="32" height="32" />` );
-    });
-    return newString;
-}
-
-var chat__watchMessages = new MutationObserver( ( e ) => {
-
-    let chatMsg__all  = chatContainer.querySelectorAll('.chat-line__message .text-fragment');
-    let chatMsg__curr_index = chatMsg__all.length - 1;
-    let chatMsg__curr = chatMsg__all[ chatMsg__curr_index ].innerHTML;
-
-    let mutated = mutateString( matched__emotes , chatMsg__curr );
-
-    let new__msg__container = chatContainer.querySelectorAll('.chat-line__message .text-fragment');
-    let new__msg__ready = new__msg__container[ new__msg__container.length - 1 ];
-
-    new__msg__ready.innerHTML = mutated;
-});
-
-chat__watchMessages.observe( chatContainer , { childList: true });
+// var chat__watchMessages = new MutationObserver( ( e ) => {
+//
+//     let chatMsg__all  = chatContainer.querySelectorAll('.chat-line__message .text-fragment');
+//     let chatMsg__curr_index = chatMsg__all.length - 1;
+//     let chatMsg__curr = chatMsg__all[ chatMsg__curr_index ].innerHTML;
+//
+//     let mutated = mutateString( matched__emotes , chatMsg__curr );
+//
+//     let new__msg__container = chatContainer.querySelectorAll('.chat-line__message .text-fragment');
+//     let new__msg__ready = new__msg__container[ new__msg__container.length - 1 ];
+//
+//     new__msg__ready.innerHTML = mutated;
+// });
+// chat__watchMessages.observe( chatContainer , { childList: true });
 
 class Chatbox extends HTMLElement {
     constructor() {
@@ -64,11 +64,11 @@ class Chatbox extends HTMLElement {
     }
 }
 
-let twitch_chat = 'chat-input.tw-block';
 
  // if the TTV_page doesn't have a chat window, don't load the app.
-if ( document.querySelector( twitch_chat ) == null ) {
-
+if ( document.querySelector( env ) ) {
 		 window.customElements.define('chatbox-card', Chatbox );
-     document.querySelector( twitch_chat ).appendChild( new Chatbox() );
+     document.querySelector( env ).appendChild( new Chatbox() );
 }
+
+//

@@ -3,6 +3,7 @@ const emotes_html = require('./_chatbox_emotes.js').emotes_html;
 var template = document.createElement('template');
     template.innerHTML = `
        		<style>
+
               #chatbot-container {
                   position: relative;
                   display: inline-block;
@@ -20,8 +21,7 @@ var template = document.createElement('template');
                   padding: 20px; display: none;
                   position: absolute;
                   right: 0;
-                  bottom: 50px;
-                  margin-bottom: 20px;
+                  bottom: 100px;
               }
 
                #column_adjust_2 {
@@ -42,11 +42,33 @@ var template = document.createElement('template');
                }
 
                #chatbot-button {
-               		 background: white; display: inline-block; padding: 10px 20px;
+               		 display: inline-block;
                    border-radius: 15px; cursor: pointer;
                    position: relative;
+                   width: 70px; height: 70px;
                }
 
+               #chatbot-button  {
+                    background-image: url('https://api.adorable.io/avatars/285/abott@adorable.png');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+               }
+               ::-webkit-scrollbar {
+                  width: 10px;
+                }
+
+                /* Track */
+                ::-webkit-scrollbar-track {
+                  background: #f1f1f1;
+                  border-radius: 10px;
+                }
+
+                /* Handle */
+                ::-webkit-scrollbar-thumb {
+                  background: #95a6ff;
+                  border-radius: 10px;
+                }
           </style>
 
           <div id="chatbot-container">
@@ -55,7 +77,7 @@ var template = document.createElement('template');
                         ${ emotes_html }
                    </div>
               </div>
-              <p id="chatbot-button"> chatbox </p>
+              <p id="chatbot-button"> </p>
           </div>
 `;
 
