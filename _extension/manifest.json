@@ -1,7 +1,7 @@
 {
-    "manifest_version": 2,
-    "name": "chatbot_awesome_TTV",
-    "author": "Bradley Lumber",
+    "manifest_version": 2q ,
+    "name": "awesome_TTV_emotes",
+    "author": "Bradley J. Lumber",
     "version": "1.0.0",
     "description": "awesome twitchTv emotes.",
     "permissions": [ "storage" , "activeTab" ],
