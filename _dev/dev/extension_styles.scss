@@ -1,7 +1,18 @@
-div {
-    background: red;
+
+#copiedClipboard {
+    position: fixed; left: 50%; top: 50px; z-index: 9999;
+    color: white; background: #04093f;
+    border-radius: 8px; padding: 12px 20px;
+    transform: translate(-50%, -50%);
+    display: block;
+    box-shadow: 3px 4px 15px 2px #818be8;
 
     h1 {
-      background: grey;
+      font-size: 0.85em; letter-spacing: 0.06em;
+      font-family: "Comic Sans MS", cursive, sans-serif;
     }
+}
+
+.clipboard_hidden#copiedClipboard {
+    display: none;
 }

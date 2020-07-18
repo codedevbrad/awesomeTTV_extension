@@ -1,11 +1,9 @@
-//
+
+import '@webcomponents/custom-elements';
+
 import { emotes_list as matched__emotes , emotes_html as emotes } from './_chatbox/_chatbox_emotes.js';
 import { template } from './_chatbox/_chatbox_template.js';
 import './extension_styles.scss';
-
-let twitch_chat = 'chat-input.tw-block' ,
-          isDev = true ,
-           env = isDev ? '#app' : twitch_chat;
 
 // var chatContainer = document.querySelector('.chat-scrollable-area__message-container');
 // const mutateString = ( words , string ) => {
@@ -15,7 +13,7 @@ let twitch_chat = 'chat-input.tw-block' ,
 //     });
 //     return newString;
 // }
-
+//
 // var chat__watchMessages = new MutationObserver( ( e ) => {
 //
 //     let chatMsg__all  = chatContainer.querySelectorAll('.chat-line__message .text-fragment');
@@ -31,24 +29,57 @@ let twitch_chat = 'chat-input.tw-block' ,
 // });
 // chat__watchMessages.observe( chatContainer , { childList: true });
 
+
 class Chatbox extends HTMLElement {
     constructor() {
          super();
          this.attachShadow({ mode: 'open' });
          this.shadowRoot.appendChild( template.content.cloneNode( true ) );
+         this.timer = null;
     }
 
-    appendToChat( emote ) {
-    		 let elem = document.getElementById('.chat-input__textarea');
-             elem.value += emote;
+    copyToClipboard ( emote ) {
+        var el = document.createElement('textarea');
+        el.value = emote;
+        el.setAttribute('readonly', '');
+        el.style = {position: 'absolute', left: '-9999px'};
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    }
+
+    removeTooltip ( tooltip ) {
+        if ( this.timer) {
+            clearTimeout( this.timer ); //cancel the previous timer.
+            this.timer = null;
+        }
+        this.timer = setTimeout( ( ) => {
+            tooltip.classList.add('clipboard_hidden');
+        } , 4000 );
     }
 
     attachClicksToEmotes ( images ) {
     		 for (let i = 0; i < images.length; i++ ) {
              images[i].addEventListener("click", ( e ) => {
-                 let emote = e.currentTarget.getAttribute('data-emote');
-                 this.appendToChat( emote );
-                 console.log( emote );
+                   let emote = e.currentTarget.getAttribute('data-emote');
+                   this.copyToClipboard( emote );
+                   // if copied to clipboard element does not exist
+                   if ( document.querySelector('#copiedClipboard') === null ) {
+                      let tooltip = document.createElement( 'div' );
+                          tooltip.id = 'copiedClipboard';
+                          tooltip.innerHTML = ` <h1> copied ${ emote } to clipboard </h1> `;
+                          document.body.appendChild( tooltip );
+
+                          this.removeTooltip( tooltip );
+
+                   } else {
+                      let tooltip = document.querySelector('#copiedClipboard');
+                          tooltip.classList.remove('clipboard_hidden');
+                          tooltip.innerHTML = ` <h1> copied ${ emote } to clipboard </h1> `;
+
+                          this.removeTooltip( tooltip );
+                   }
              });
          }
     }
@@ -64,11 +95,9 @@ class Chatbox extends HTMLElement {
     }
 }
 
+console.log( window.customElements );
+window.customElements.define('chatbox-card', Chatbox );
 
- // if the TTV_page doesn't have a chat window, don't load the app.
-if ( document.querySelector( env ) ) {
-		 window.customElements.define('chatbox-card', Chatbox );
-     document.querySelector( env ).appendChild( new Chatbox() );
-}
+document.querySelector( 'body' ).appendChild( new Chatbox );
 
 //

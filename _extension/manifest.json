@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2q ,
+    "manifest_version": 2 ,
     "name": "awesome_TTV_emotes",
     "author": "Bradley J. Lumber",
     "version": "1.0.0",
@@ -9,11 +9,16 @@
     "browser_action": {
      "default_popup": "index.html"
     } ,
+    "icons": {
+       "16": "favicon_icon.png",
+       "48": "favicon_icon.png",
+      "128": "favicon_icon.png"
+    },
     "content_scripts": [
-          {
-            "matches": ["https://*.twitch.tv/*"],
-            "css": ["/dist/css/extension_style.css"] ,
-            "js":  ["/dist/js/extension_js.js"]
-          }
+      {
+        "matches": ["https://*.twitch.tv/*"],
+        "css": ["/dist/css/extension_style.css"] ,
+        "js":  ["/dist/js/extension_js.js"]
+      }
     ]
 }

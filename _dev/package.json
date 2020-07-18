@@ -19,6 +19,7 @@
         "webpack-dev-server": "^3.10.1"
     },
     "dependencies": {
+        "@webcomponents/custom-elements": "^1.4.1",
         "concurrently": "^5.1.0"
     }
 }
